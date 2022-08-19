@@ -1,5 +1,6 @@
 <template>
-  <div class="body px-4 pt-2 md:px-16 md:pt-6 bg-[#2B2525] min-h-screen">
+  <Home/>
+  <!-- <div class="body px-4 pt-2 md:px-16 md:pt-6 bg-[#2B2525] min-h-screen">
     <div class="flex flex-row container justify-between text-white ">
       <div class="text-yellow-400 ">CRYPTOHUNTER</div>
       <div>
@@ -28,22 +29,22 @@
           <input type="text" class="w-2/3 border border-white rounded-md bg-transparent text-white p-1"
             placeholder="Search for a Cryptocurrency...">
           <table class="list mt-2 w-2/3 ">
-              <thead class="">
-                  <tr class="bg-yellow-500 ">
-                      <th class="px-[2rem] rounded-l-md">Coin</th>
-                      <th class="px-[2rem] ">Price</th>
-                      <th class="px-[2rem] ">24h change</th>
-                      <th class="px-[2rem] rounded-r-md">Market Cap</th>
-                  </tr>
-              </thead>
-              <tbody class="text-white text-center">
-                  <tr>
-                    <td class="px-[2rem]">dummy</td>
-                    <td class="px-[2rem]">dummy</td>
-                    <td class="px-[2rem]">dummy</td>
-                    <td class="px-[2rem]">dummy</td>
-                  </tr>
-              </tbody>
+            <thead class="">
+              <tr class="bg-yellow-500 ">
+                <th class="px-[2rem] rounded-l-md">Coin</th>
+                <th class="px-[2rem] ">Price</th>
+                <th class="px-[2rem] ">24h change</th>
+                <th class="px-[2rem] rounded-r-md">Market Cap</th>
+              </tr>
+            </thead>
+            <tbody class="text-white text-center">
+              <tr v-for="(crypto, index) in list" :key="index">
+                <td class="px-[2rem]">{{ crypto.name }}</td>
+                <td class="px-[2rem]">{{ crypto.symbol }}</td>
+                <td class="px-[2rem]"></td>
+                <td class="px-[2rem]"></td>
+              </tr>
+            </tbody>
           </table>
 
         </div>
@@ -51,17 +52,24 @@
 
     </div>
 
-  </div>
+  </div> -->
 
 </template>
 
 <script>
-import Home from "./components/Home.vue"
 export default {
-  components: {
-    Home,
+  computed: {
+    ...mapGetters({
+      list:'getList'
+    })
   },
 }
+</script>
+
+<script setup>
+ import Home from './components/Home.vue'
+  import { mapGetters, mapActions } from 'vuex';
+
 </script>
 
 <style>
