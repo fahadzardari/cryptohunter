@@ -58,11 +58,10 @@
 
 <script>
 export default {
-  computed: {
-    ...mapGetters({
-      list:'getList'
-    })
-  },
+  mounted () {
+
+  this.$store.dispatch('setList');
+},
 }
 </script>
 

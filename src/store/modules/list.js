@@ -3,10 +3,7 @@ import axios from "axios"
 
 export default {
         state: () => ({
-            list: [
-                
-
-            ],
+            list: [],
         }),
     
         getters: {
@@ -15,14 +12,19 @@ export default {
         },
     
         mutations: {
-
+            saveData(state , fetchedData){
+                state.list = fetchedData;
+            }
         },
     
         actions: {
-                setList(state){
+                setList({commit,state}){
                         axios
                              .get('https://api.coingecko.com/api/v3/coins/list')
-                             .then(response => (state.list = response))
+                             .then( response => {
+                                                    commit('saveData' , response);
+                                                    return state.list;
+                                                })
                 }
         },
     }
