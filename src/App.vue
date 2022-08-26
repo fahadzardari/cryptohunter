@@ -1,9 +1,7 @@
 <template class="body">
   
 
-
-
-
+<!-- <LineChart/> -->
   <List/>
 
 
@@ -11,9 +9,11 @@
 
 <script>
 import List from './components/List.vue'
+import LineChart from './components/LineChart.vue'
 export default {
   components: {
     List,
+    LineChart
   },
   data() {
     return {
