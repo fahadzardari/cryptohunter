@@ -125,15 +125,200 @@
 </template>
 
 <script>
-import currenciesImport from '../assets/currencies.json';
 import Chart from 'chart.js/auto';
 export default {
   data() {
     return {
+      currencies: [
+        {
+          "currency": "Argentina Peso",
+          "abbreviation": "ARS",
+          "symbol": "$"
+        },
+        {
+          "currency": "Australia Dollar",
+          "abbreviation": "AUD",
+          "symbol": "$"
+        },
+        {
+          "currency": "Bermuda Dollar",
+          "abbreviation": "BMD",
+          "symbol": "$"
+        },
+        {
+          "currency": "Canada Dollar",
+          "abbreviation": "CAD",
+          "symbol": "$"
+        },
+        {
+          "currency": "Chile Peso",
+          "abbreviation": "CLP",
+          "symbol": "$"
+        },
+        {
+          "currency": "China Yuan Renminbi",
+          "abbreviation": "CNY",
+          "symbol": "¥"
+        },
+        {
+          "currency": "Czech Republic Koruna",
+          "abbreviation": "CZK",
+          "symbol": "Kč"
+        },
+        {
+          "currency": "Denmark Krone",
+          "abbreviation": "DKK",
+          "symbol": "kr"
+        },
+        {
+          "currency": "Euro Member Countries",
+          "abbreviation": "EUR",
+          "symbol": "€"
+        },
+        {
+          "currency": "Hong Kong Dollar",
+          "abbreviation": "HKD",
+          "symbol": "$"
+        },
+        {
+          "currency": "Hungary Forint",
+          "abbreviation": "HUF",
+          "symbol": "Ft"
+        },
+        {
+          "currency": "India Rupee",
+          "abbreviation": "INR",
+          "symbol": "₹"
+        },
+        {
+          "currency": "Indonesia Rupiah",
+          "abbreviation": "IDR",
+          "symbol": "Rp"
+        },
+        {
+          "currency": "Israel Shekel",
+          "abbreviation": "ILS",
+          "symbol": "₪"
+        },
+        {
+          "currency": "Japan Yen",
+          "abbreviation": "JPY",
+          "symbol": "¥"
+        },
+        {
+          "currency": "Korea (South) Won",
+          "abbreviation": "KRW",
+          "symbol": "₩"
+        },
+        {
+          "currency": "Malaysia Ringgit",
+          "abbreviation": "MYR",
+          "symbol": "RM"
+        },
+        {
+          "currency": "Mexico Peso",
+          "abbreviation": "MXN",
+          "symbol": "$"
+        },
+        {
+          "currency": "New Zealand Dollar",
+          "abbreviation": "NZD",
+          "symbol": "$"
+        },
+        {
+          "currency": "Nigeria Naira",
+          "abbreviation": "NGN",
+          "symbol": "₦"
+        },
+        {
+          "currency": "Norway Krone",
+          "abbreviation": "NOK",
+          "symbol": "kr"
+        },
+        {
+          "currency": "Pakistan Rupee",
+          "abbreviation": "PKR",
+          "symbol": "₨"
+        },
+        {
+          "currency": "Philippines Peso",
+          "abbreviation": "PHP",
+          "symbol": "₱"
+        },
+        {
+          "currency": "Poland Zloty",
+          "abbreviation": "PLN",
+          "symbol": "zł"
+        },
+        {
+          "currency": "Saudi Arabia Riyal",
+          "abbreviation": "SAR",
+          "symbol": "﷼"
+        },
+        {
+          "currency": "Singapore Dollar",
+          "abbreviation": "SGD",
+          "symbol": "$"
+        },
+        {
+          "currency": "South Africa Rand",
+          "abbreviation": "ZAR",
+          "symbol": "R"
+        },
+        {
+          "currency": "Sri Lanka Rupee",
+          "abbreviation": "LKR",
+          "symbol": "₨"
+        },
+        {
+          "currency": "Sweden Krona",
+          "abbreviation": "SEK",
+          "symbol": "kr"
+        },
+        {
+          "currency": "Switzerland Franc",
+          "abbreviation": "CHF",
+          "symbol": "CHF"
+        },
+        {
+          "currency": "Taiwan New Dollar",
+          "abbreviation": "TWD",
+          "symbol": "NT$"
+        },
+        {
+          "currency": "Thailand Baht",
+          "abbreviation": "THB",
+          "symbol": "฿"
+        },
+        {
+          "currency": "Turkey Lira",
+          "abbreviation": "TRY",
+          "symbol": "₤"
+        },
+        {
+          "currency": "United Kingdom Pound",
+          "abbreviation": "GBP",
+          "symbol": "£"
+        },
+        {
+          "currency": "United States Dollar",
+          "abbreviation": "USD",
+          "symbol": "$"
+        },
+        {
+          "currency": "Venezuela Bolivar",
+          "abbreviation": "VEF",
+          "symbol": "Bs"
+        },
+        {
+          "currency": "Viet Nam Dong",
+          "abbreviation": "VND",
+          "symbol": "₫"
+        }
+      ],
       list: [],
       currentList: [],
       listToShow: [],
-      currencies: currenciesImport,
       currencyToShowIn: null,
       searchTerm: "",
       currencyId: null,
