@@ -150,17 +150,6 @@ export default {
     this.listToShow = this.currentList;
     this.list = await this.getFullList();
   },
-  async mounted() {
-    const response = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1&interval=hourly');
-
-    const dataFetched = response.json();
-    let dataToShow;
-    for (price in dataFetched) {
-      dataToShow.push(price[1]);
-    }
-    console.log(response.json())
-
-  },
 
   methods: {
     async getFullList() {
