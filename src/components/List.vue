@@ -27,7 +27,7 @@
             <img :src="list[n - 1].image" alt="{{list[n-1].id}}" class="h-[2rem] w-[2rem]">
             <h1>{{ list[n - 1].name }} <span
                 :class="(list[n - 1].price_change_24h < 0) ? 'text-red-500' : 'text-green-500'">{{ list[n -
-                    1].price_change_percentage_24h
+                    1].price_change_percentage_24h.toFixed(4)
                     * 10
                 }}%</span></h1>
             <h1>{{ currencies[currencyId].symbol }}{{ list[n - 1].current_price }}</h1>
@@ -56,10 +56,10 @@
                   class="cursor-pointer ">
                   <td class="px-[2rem] flex items-center font-bold"><img :src="crypto.image"
                       class="w-[1rem] h-[1rem] mr-[0.1rem]" alt="">{{ crypto.name }}</td>
-                  <td class="px-[2rem]">{{ currencies[currencyId].symbol }} {{ crypto.current_price }}</td>
+                  <td class="px-[2rem]">{{ currencies[currencyId].symbol }} {{ crypto.current_price.toFixed(3) }}</td>
                   <td class="px-[2rem]" :class="(crypto.price_change_24h < 0) ? 'text-red-500' : 'text-green-500'">
                     <span :class="(crypto.price_change_24h > 0) ? '' : 'hidden'">+</span>{{
-                        crypto.price_change_percentage_24h * 10
+                        (crypto.price_change_percentage_24h).toFixed(3)
                     }} %
                   </td>
                   <td class="px-[2rem]">{{ currencies[currencyId].symbol }} {{ crypto.market_cap }}</td>
@@ -94,7 +94,7 @@
     </div>
 
     <div v-show="detailsScreen" class="">
-      <p class="text-white cursor-pointer" @click="detailsScreen = false">BACK</p>
+      <p class="text-white cursor-pointer" @click="detailsScreen = false"><img src="../assets/barrow.png" alt=""></p>
       <div class="detailsScreen mt-[3rem] md:grid md:grid-cols-8">
         <div class="md:col-span-2  flex flex-col gap-4 items-center justify-center text-white  details">
           <img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" class="h-[8rem] w-[8rem]">
@@ -114,7 +114,8 @@
     </div>
 
     <div v-show="newsScreen" class="newsScreen">
-      <p class="text-white cursor-pointer" @click="newsScreen = false">BACK</p>
+      <p class="text-white cursor-pointer" @click="newsScreen = false"><img src="../assets/barrow.png" alt=""></p>
+
       <div class="container">
 
       </div>
@@ -136,7 +137,7 @@ export default {
       currencyToShowIn: null,
       searchTerm: "",
       currencyId: null,
-      newsScreen:false,
+      newsScreen: false,
       detailsScreen: false,
       coinDetail: [],
 
@@ -222,7 +223,7 @@ export default {
                 data: pricesToShow,
                 borderWidth: 2,
                 borderColor: 'black',
-                backgroundColor: ['#9AB8F7' , '#9A3BC7'],
+                backgroundColor: ['#9AB8F7', '#9A3BC7'],
                 fill: 'start',
                 tension: 0.5,
                 pointRadius: 1
