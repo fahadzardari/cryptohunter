@@ -30,7 +30,7 @@
                     1].price_change_percentage_24h.toFixed(4)
                     * 10
                 }}%</span></h1>
-            <h1>{{ currencies[currencyId].symbol }}{{ list[n - 1].current_price }}</h1>
+            <h1>{{ currencies[currencyId]['symbol'] }}{{ list[n - 1].current_price }}</h1>
           </div>
         </div>
       </div>
@@ -56,13 +56,13 @@
                   class="cursor-pointer ">
                   <td class="px-[2rem] flex items-center font-bold"><img :src="crypto.image"
                       class="w-[1rem] h-[1rem] mr-[0.1rem]" alt="">{{ crypto.name }}</td>
-                  <td class="px-[2rem]">{{ currencies[currencyId].symbol }} {{ crypto.current_price.toFixed(3) }}</td>
+                  <td class="px-[2rem]">{{ currencies[currencyId]['symbol'] }} {{ crypto.current_price.toFixed(3) }}</td>
                   <td class="px-[2rem]" :class="(crypto.price_change_24h < 0) ? 'text-red-500' : 'text-green-500'">
                     <span :class="(crypto.price_change_24h > 0) ? '' : 'hidden'">+</span>{{
                         (crypto.price_change_percentage_24h).toFixed(3)
                     }} %
                   </td>
-                  <td class="px-[2rem]">{{ currencies[currencyId].symbol }} {{ crypto.market_cap }}</td>
+                  <td class="px-[2rem]">{{ currencies[currencyId]['symbol'] }} {{ crypto.market_cap }}</td>
                 </tr>
               </tbody>
             </table>
