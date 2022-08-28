@@ -1,4 +1,8 @@
 <template>
+
+  <head>
+    <link rel="icon" href="./assets/logo3.png" type="image/png">
+  </head>
   {{ currencies[77] }}
   <div class="body px-4 pt-2 md:px-16 md:pt-6 bg-[#2B2525] min-h-screen">
     <div v-show="!detailsScreen && !newsScreen">
@@ -6,7 +10,7 @@
         <div class="flex gap-4">
           <div class="text-yellow-400 ">CRYPTOHUNTER</div>
 
-          <div class="cursor-pointer " @click="newsScreen = true">NEWS</div>
+          <div class="cursor-pointer " @click="showNewsScreen()">NEWS</div>
         </div>
         <div>
           <select v-model="currencyId" @change="changeCurrency()" class="bg-[#2B2525]  rounded-md p-1">
@@ -52,11 +56,12 @@
                 </tr>
               </thead>
               <tbody class="text-white text-center ">
-                <tr v-for="(crypto, index) in listToShow" :key="index" @click="goToDetails(crypto.id)"
+                <tr v-for="(crypto, index) in listToShow" :key="index" @click="goToDetails(crypto.id, 1, 'hourly')"
                   class="cursor-pointer ">
                   <td class="px-[2rem] flex items-center font-bold"><img :src="crypto.image"
                       class="w-[1rem] h-[1rem] mr-[0.1rem]" alt="">{{ crypto.name }}</td>
-                  <td class="px-[2rem]">{{ currencies[currencyId]['symbol'] }} {{ crypto.current_price.toFixed(3) }}</td>
+                  <td class="px-[2rem]">{{ currencies[currencyId]['symbol'] }} {{ crypto.current_price.toFixed(3) }}
+                  </td>
                   <td class="px-[2rem]" :class="(crypto.price_change_24h < 0) ? 'text-red-500' : 'text-green-500'">
                     <span :class="(crypto.price_change_24h > 0) ? '' : 'hidden'">+</span>{{
                         (crypto.price_change_percentage_24h).toFixed(3)
@@ -97,10 +102,10 @@
       <p class="text-white cursor-pointer" @click="detailsScreen = false"><img src="./assets/barrow.png" alt=""></p>
       <div class="detailsScreen mt-[3rem] md:grid md:grid-cols-8">
         <div class="md:col-span-2  flex flex-col gap-4 items-center justify-center text-white  details">
-          <img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" class="h-[8rem] w-[8rem]">
-          <p class="text-[1.8rem] uppercase">Bitcoin</p>
-          <p class="text-[1.2rem] uppercase">Rank:1</p>
-          <p class="text-[1.2rem] uppercase">Price:$299999</p>
+          <img :src="currentCoinDetail.image['large']" class="h-[8rem] w-[8rem]">
+          <p class="text-[1.8rem] uppercase">{{ currentCoinDetail.name }}</p>
+          <p class="text-[1.2rem] uppercase">Rank:{{ currentCoinDetail.market_cap_rank }}</p>
+          <p class="text-[1.2rem] uppercase">Price:{{ currencies[currencyId]['symbol'] }} </p>
           <p class="text-[1.2rem] uppercase">24h Change:<span class="text-green-700">1%</span></p>
           <p class="text-[1.2rem] uppercase">All-Time-High:$299999</p>
           <p class="text-[1.2rem] uppercase">All-Time-Low:$299999</p>
@@ -116,7 +121,28 @@
     <div v-show="newsScreen" class="newsScreen">
       <p class="text-white cursor-pointer" @click="newsScreen = false"><img src="./assets/barrow.png" alt=""></p>
 
-      <div class="container">
+      <div class="container md:grid md:grid-cols-3 gap-2">
+        <div href="https://somlink.com" class="bg-white rounded-md ">
+          <img src="./assets/bg.jpg" class="">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse voluptatum a nulla quasi? Fugit repellendus
+            sit doloribus modi natus voluptatem odit accusantium, id molestiae in, consequatur nobis iusto itaque
+            labore.
+          </p>
+        </div>
+        <div href="https://somlink.com" class="bg-white">
+          <img src="./assets/bg.jpg" class="">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse voluptatum a nulla quasi? Fugit repellendus
+            sit doloribus modi natus voluptatem odit accusantium, id molestiae in, consequatur nobis iusto itaque
+            labore.
+          </p>
+        </div>
+                <div href="https://somlink.com" class="bg-white">
+          <img src="./assets/bg.jpg" class="">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse voluptatum a nulla quasi? Fugit repellendus
+            sit doloribus modi natus voluptatem odit accusantium, id molestiae in, consequatur nobis iusto itaque
+            labore.
+          </p>
+        </div>
 
       </div>
     </div>
@@ -126,197 +152,13 @@
 
 <script>
 import Chart from 'chart.js/auto';
+import currencyImport from './assets/currencies.json';
+import dummy from './assets/dummy.json';
 export default {
   data() {
     return {
-      currencies: [
-        {
-          "currency": "Argentina Peso",
-          "abbreviation": "ARS",
-          "symbol": "$"
-        },
-        {
-          "currency": "Australia Dollar",
-          "abbreviation": "AUD",
-          "symbol": "$"
-        },
-        {
-          "currency": "Bermuda Dollar",
-          "abbreviation": "BMD",
-          "symbol": "$"
-        },
-        {
-          "currency": "Canada Dollar",
-          "abbreviation": "CAD",
-          "symbol": "$"
-        },
-        {
-          "currency": "Chile Peso",
-          "abbreviation": "CLP",
-          "symbol": "$"
-        },
-        {
-          "currency": "China Yuan Renminbi",
-          "abbreviation": "CNY",
-          "symbol": "¥"
-        },
-        {
-          "currency": "Czech Republic Koruna",
-          "abbreviation": "CZK",
-          "symbol": "Kč"
-        },
-        {
-          "currency": "Denmark Krone",
-          "abbreviation": "DKK",
-          "symbol": "kr"
-        },
-        {
-          "currency": "Euro Member Countries",
-          "abbreviation": "EUR",
-          "symbol": "€"
-        },
-        {
-          "currency": "Hong Kong Dollar",
-          "abbreviation": "HKD",
-          "symbol": "$"
-        },
-        {
-          "currency": "Hungary Forint",
-          "abbreviation": "HUF",
-          "symbol": "Ft"
-        },
-        {
-          "currency": "India Rupee",
-          "abbreviation": "INR",
-          "symbol": "₹"
-        },
-        {
-          "currency": "Indonesia Rupiah",
-          "abbreviation": "IDR",
-          "symbol": "Rp"
-        },
-        {
-          "currency": "Israel Shekel",
-          "abbreviation": "ILS",
-          "symbol": "₪"
-        },
-        {
-          "currency": "Japan Yen",
-          "abbreviation": "JPY",
-          "symbol": "¥"
-        },
-        {
-          "currency": "Korea (South) Won",
-          "abbreviation": "KRW",
-          "symbol": "₩"
-        },
-        {
-          "currency": "Malaysia Ringgit",
-          "abbreviation": "MYR",
-          "symbol": "RM"
-        },
-        {
-          "currency": "Mexico Peso",
-          "abbreviation": "MXN",
-          "symbol": "$"
-        },
-        {
-          "currency": "New Zealand Dollar",
-          "abbreviation": "NZD",
-          "symbol": "$"
-        },
-        {
-          "currency": "Nigeria Naira",
-          "abbreviation": "NGN",
-          "symbol": "₦"
-        },
-        {
-          "currency": "Norway Krone",
-          "abbreviation": "NOK",
-          "symbol": "kr"
-        },
-        {
-          "currency": "Pakistan Rupee",
-          "abbreviation": "PKR",
-          "symbol": "₨"
-        },
-        {
-          "currency": "Philippines Peso",
-          "abbreviation": "PHP",
-          "symbol": "₱"
-        },
-        {
-          "currency": "Poland Zloty",
-          "abbreviation": "PLN",
-          "symbol": "zł"
-        },
-        {
-          "currency": "Saudi Arabia Riyal",
-          "abbreviation": "SAR",
-          "symbol": "﷼"
-        },
-        {
-          "currency": "Singapore Dollar",
-          "abbreviation": "SGD",
-          "symbol": "$"
-        },
-        {
-          "currency": "South Africa Rand",
-          "abbreviation": "ZAR",
-          "symbol": "R"
-        },
-        {
-          "currency": "Sri Lanka Rupee",
-          "abbreviation": "LKR",
-          "symbol": "₨"
-        },
-        {
-          "currency": "Sweden Krona",
-          "abbreviation": "SEK",
-          "symbol": "kr"
-        },
-        {
-          "currency": "Switzerland Franc",
-          "abbreviation": "CHF",
-          "symbol": "CHF"
-        },
-        {
-          "currency": "Taiwan New Dollar",
-          "abbreviation": "TWD",
-          "symbol": "NT$"
-        },
-        {
-          "currency": "Thailand Baht",
-          "abbreviation": "THB",
-          "symbol": "฿"
-        },
-        {
-          "currency": "Turkey Lira",
-          "abbreviation": "TRY",
-          "symbol": "₤"
-        },
-        {
-          "currency": "United Kingdom Pound",
-          "abbreviation": "GBP",
-          "symbol": "£"
-        },
-        {
-          "currency": "United States Dollar",
-          "abbreviation": "USD",
-          "symbol": "$"
-        },
-        {
-          "currency": "Venezuela Bolivar",
-          "abbreviation": "VEF",
-          "symbol": "Bs"
-        },
-        {
-          "currency": "Viet Nam Dong",
-          "abbreviation": "VND",
-          "symbol": "₫"
-        }
-      ],
       list: [],
+      currencies: currencyImport,
       currentList: [],
       listToShow: [],
       currencyToShowIn: null,
@@ -324,7 +166,7 @@ export default {
       currencyId: null,
       newsScreen: false,
       detailsScreen: false,
-      coinDetail: [],
+      currentCoinDetail: dummy,
 
     }
   },
@@ -371,10 +213,10 @@ export default {
         });
       }
     },
-    goToDetails(coinName) {
+    goToDetails(coinName, days, interval) {
       let pricesToShow = [];
       let labelsToShow = [];
-      fetch('https://api.coingecko.com/api/v3/coins/' + coinName + '/market_chart?vs_currency=' + this.currencyToShowIn + '&days=1&interval=hourly')
+      fetch('https://api.coingecko.com/api/v3/coins/' + coinName + '/market_chart?vs_currency=' + this.currencyToShowIn + '&days=' + days + '&interval=' + interval + '')
         .then(response => response.json())
         .then((data) => {
           console.log(data['prices'][0][1].toFixed(2))
@@ -387,6 +229,15 @@ export default {
 
         })
         .then(() => {
+          fetch('https://api.coingecko.com/api/v3/coins/' + coinName + '?vs_currency=' + this.currencyToShowIn + '')
+            .then(response => response.json())
+            .then((data) => this.currentCoinDetail = data)
+            .then(() => console.log(this.currentCoinDetail.image['small']))
+
+          let chartStatus = Chart.getChart("myChart"); // <canvas> id
+          if (chartStatus != undefined) {
+            chartStatus.destroy();
+          }
           const ctx = document.getElementById('myChart');
           const myChart = new Chart(ctx, {
             type: 'line',
@@ -406,7 +257,9 @@ export default {
             options: {
               scales: {
                 y: {
-                  beginAtZero: false
+                  beginAtZero: false,
+                  suggestedMin: Math.min(...pricesToShow) - Math.min(...pricesToShow) / 10,
+                  suggestedMax: Math.max(...pricesToShow) + Math.max(...pricesToShow) / 10
                 }
               }
             }
@@ -418,9 +271,25 @@ export default {
       // let priceToShow = await this.parseCoinData();
 
       // console.log(priceToShow)
+    },
+    showNewsScreen() {
+      this.newsScreen = true;
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '9559933af2mshd6a255f7a35e6cep15b991jsnb5082386712c',
+          'X-RapidAPI-Host': 'crypto-news15.p.rapidapi.com'
+        }
+      };
+
+      fetch('https://crypto-news15.p.rapidapi.com/news/amb', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
     }
 
   }
+
 }
 </script>
 
