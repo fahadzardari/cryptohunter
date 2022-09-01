@@ -4,17 +4,19 @@
     <link rel="icon" href="./assets/logo3.png" type="image/png">
   </head>
   <div class="body px-4 pt-2 md:px-16 md:pt-6 bg-[#2B2525] min-h-screen">
-    <div v-show="!detailsScreen && !newsScreen">
-      <div class="flex flex-row container justify-between text-white ">
-        <div class="flex gap-4">
-          <div class="text-yellow-400 ">CRYPTOHUNTER</div>
+    <div v-show="!detailsScreen && !newsScreen" >
+      <!-- <div></div>
+      div -->
+      <div class="flex flex-row container items-center justify-between text-white ">
+        <div class="flex flex-row items-center gap-4">
+          <img src="./assets/logo1.svg" class="h-[5rem] w-[5rem]" alt="">
 
           <div class="cursor-pointer " @click="showNewsScreen()">NEWS</div>
         </div>
         <div>
           <select v-model="currencyId" @change="changeCurrency()" class="bg-[#2B2525]  rounded-md p-1">
             <optgroup class="bg-[#2B2525]">
-              <option v-for="(currency, index) in currencies" :key="index" :value="index">{{  currency.abbreviation  }}
+              <option v-for="(currency, index) in currencies" :key="index" :value="index">{{ currency.abbreviation }}
               </option>
             </optgroup>
           </select>
@@ -28,28 +30,28 @@
         <div class="grid grid-cols-4 flex-row justify-between gap-4">
           <div v-for="n in 4" :key="n" class="card rounded-md flex flex-col p-2 items-center ">
             <img :src="list[n - 1].image" alt="{{list[n-1].id}}" class="h-[2rem] w-[2rem]">
-            <h1>{{  list[n - 1].name  }} <span
-                :class="(list[n - 1].price_change_24h < 0) ? 'text-red-500' : 'text-green-500'">{{  list[n -
-                1].price_change_percentage_24h.toFixed(4)
-                * 10
-
-
-
-
+            <h1>{{ list[n - 1].name }} <span
+                :class="(list[n - 1].price_change_24h < 0) ? 'text-red-500' : 'text-green-500'">{{ list[n -
+                    1].price_change_percentage_24h.toFixed(4)
+                    * 10
+                
+                
+                
+                
                 }}%</span></h1>
-            <h1>{{  currencies[currencyId]['symbol']  }}{{  list[n - 1].current_price  }}</h1>
+            <h1>{{ currencies[currencyId]['symbol'] }}{{ list[n - 1].current_price }}</h1>
           </div>
         </div>
       </div>
-      <div class="home container mt-[2rem]">
+      <div class="home  mt-[2rem]">
         <section class="text-center text-white">
           <h1>Cryptocurrency Prices by Market Cap</h1>
         </section>
         <div class="container flex justify-center items-center w-full mt-[1rem]">
           <div class="w-full flex flex-col items-center justify-center">
-            <input type="text" class="w-2/3 border border-white rounded-md bg-transparent text-white p-1"
+            <input type="text" class="w-full md:w-2/3 border border-white rounded-md bg-transparent text-white p-1"
               placeholder="Search for a Cryptocurrency..." v-model="searchTerm" @keyup="search()">
-            <table class="list mt-2 w-2/3 ">
+            <table class="list mt-2 text-[1rem] w-0 md:w-2/3">
               <thead class="">
                 <tr class="bg-yellow-500 ">
                   <th class="px-[2rem] rounded-l-md">Coin</th>
@@ -62,53 +64,46 @@
                 <tr v-for="(crypto, index) in listToShow" :key="index" @click="goToDetails(crypto.id, 1, 'hourly')"
                   class="cursor-pointer ">
                   <td class="px-[2rem] flex items-center font-bold"><img :src="crypto.image"
-                      class="w-[1rem] h-[1rem] mr-[0.1rem]" alt="">{{  crypto.name  }}</td>
-                  <td class="px-[2rem]">{{  currencies[currencyId]['symbol']  }} {{  crypto.current_price.toFixed(3)  }}
+                      class="w-[1rem] h-[1rem] mr-[0.1rem]" alt="">{{ crypto.name }}</td>
+                  <td class="px-[2rem]">{{ currencies[currencyId]['symbol'] }} {{ crypto.current_price.toFixed(3) }}
                   </td>
                   <td class="px-[2rem]" :class="(crypto.price_change_24h < 0) ? 'text-red-500' : 'text-green-500'">
                     <span :class="(crypto.price_change_24h > 0) ? '' : 'hidden'">+</span>{{
-                     (crypto.price_change_percentage_24h).toFixed(3) 
+                        (crypto.price_change_percentage_24h).toFixed(3)
                     }} %
                   </td>
-                  <td class="px-[2rem]">{{  currencies[currencyId]['symbol']  }} {{  crypto.market_cap  }}</td>
+                  <td class="px-[2rem]">{{ currencies[currencyId]['symbol'] }} {{ crypto.market_cap }}</td>
                 </tr>
               </tbody>
             </table>
-            <!-- <div class="buttons">
-              <button class="border border-white rounded-2xl px-[0.4rem] text-white font-extrabold"
-                @click="changeList('1')">1</button>
-              <button class="border border-white rounded-2xl px-[0.4rem] text-white font-extrabold"
-                @click="changeList('2')">2</button>
-              <button class="border border-white rounded-2xl px-[0.4rem] text-white font-extrabold"
-                @click="changeList('3')">3</button>
-              <button class="border border-white rounded-2xl px-[0.4rem] text-white font-extrabold"
-                @click="changeList('4')">4</button>
-              <button class="border border-white rounded-2xl px-[0.4rem] text-white font-extrabold"
-                @click="changeList('5')">5</button>
-              <button class="border border-white rounded-2xl px-[0.4rem] text-white font-extrabold"
-                @click="changeList('6')">6</button>
-              <button class="border border-white rounded-2xl px-[0.4rem] text-white font-extrabold"
-                @click="changeList('7')">7</button>
-              <button class="border border-white rounded-2xl px-[0.4rem] text-white font-extrabold"
-                @click="changeList('8')">8</button>
-              <button class="border border-white rounded-2xl px-[0.4rem] text-white font-extrabold"
-                @click="changeList('9')">9</button>
-              <button class="border border-white rounded-2xl px-[0.4rem] text-white font-extrabold"
-                @click="changeList('10')">10</button>
-            </div> -->
+
           </div>
         </div>
       </div>
     </div>
 
     <div v-show="detailsScreen" class="">
-      <p class="text-white cursor-pointer" @click="detailsScreen = false"><img src="./assets/barrow.png" alt=""></p>
+      <div class="flex flex-row justify-between">
+        <div class="flex flex-row items-center justify-center ">
+          <img class="text-white cursor-pointer mx-4" @click="detailsScreen = false" src="./assets/barrow.png" alt="">
+          <img src="./assets/logo1.svg" class="h-[5rem] w-[5rem]" alt="">
+        </div>
+
+        <select class="bg-[#2B2525] text-white rounded-md p-0" v-model="chartTimePeriod" @change="goToDetails(cryptoId, chartTimePeriod, 'hourly')">
+          <optgroup class="bg-[#2B2525]">
+            <option value="1">24h</option>
+            <option value="7">1 Week</option>
+            <option value="30">1 Month</option>
+          </optgroup>
+        </select>
+
+      </div>
       <div class="detailsScreen mt-[3rem] md:grid md:grid-cols-8">
         <div class="md:col-span-2  flex flex-col gap-4 items-center justify-center text-white  details">
           <img :src="currentCoinDetail.image['large']" class="h-[8rem] w-[8rem]">
-          <p class="text-[1.8rem] uppercase">{{  currentCoinDetail.name  }}</p>
-          <p class="text-[1.2rem] uppercase">Rank:{{  currentCoinDetail.market_cap_rank  }}</p>
-          <p class="text-[1.2rem] uppercase">Price:{{  currencies[currencyId]['symbol']  }} </p>
+          <p class="text-[1.8rem] uppercase">{{ currentCoinDetail.name }}</p>
+          <p class="text-[1.2rem] uppercase">Rank:{{ currentCoinDetail.market_cap_rank }}</p>
+          <p class="text-[1.2rem] uppercase">Price:{{ currencies[currencyId]['symbol'] }} </p>
           <p class="text-[1.2rem] uppercase">24h Change:<span class="text-green-700">1%</span></p>
           <p class="text-[1.2rem] uppercase">All-Time-High:$299999</p>
           <p class="text-[1.2rem] uppercase">All-Time-Low:$299999</p>
@@ -122,8 +117,13 @@
     </div>
 
     <div v-show="newsScreen" class="newsScreen">
-      <p class="text-white cursor-pointer" @click="newsScreen = false"><img src="./assets/barrow.png" alt=""></p>
 
+      <div class="flex flex-col items-start">
+        <div class="flex flex-row items-center justify-center ">
+          <p class="text-white cursor-pointer" @click="newsScreen = false"><img src="./assets/barrow.png" alt=""></p>
+          <img src="./assets/logo1.svg" class="h-[5rem] w-[5rem]" alt="">
+        </div>
+      </div>
       <div class="container md:grid md:grid-cols-3 gap-2">
         <div href="https://somlink.com" class="bg-white rounded-md ">
           <img src="./assets/bg.jpg" class="">
@@ -170,6 +170,8 @@ export default {
       newsScreen: false,
       detailsScreen: false,
       currentCoinDetail: dummy,
+      cryptoId: null,
+      chartTimePeriod:null,
 
     }
   },
@@ -184,8 +186,8 @@ export default {
   methods: {
     async getFullList() {
       // this.currencyId =  4;
-     this.currencyId = localStorage.getItem("currencyId") || 77;
-      
+      this.currencyId = localStorage.getItem("currencyId") || 77;
+
       this.currencyToShowIn = localStorage.getItem("currencyToShowIn") || "pkr";
       let response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=' + this.currencyToShowIn + '&order=market_cap_desc');
       return response.json();
@@ -221,6 +223,7 @@ export default {
     goToDetails(coinName, days, interval) {
       let pricesToShow = [];
       let labelsToShow = [];
+      this.cryptoId = coinName;
       fetch('https://api.coingecko.com/api/v3/coins/' + coinName + '/market_chart?vs_currency=' + this.currencyToShowIn + '&days=' + days + '&interval=' + interval + '')
         .then(response => response.json())
         .then((data) => {
@@ -248,9 +251,9 @@ export default {
               default: "rgba(234 , 179 , 8 , 1)",
               half: "rgba(234 , 179 , 8, 0.75)",
               quarter: "rgba(234 , 179 , 8, 0.25)",
-               zero: "rgba(234 , 179 , 8, 0.45)"
+              zero: "rgba(234 , 179 , 8, 0.45)"
             }
-            
+
           };
 
           const ctx = document.getElementById('myChart').getContext('2d');
