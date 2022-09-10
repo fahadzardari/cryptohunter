@@ -22,7 +22,7 @@
   {
     "currency": "Pakistan Rupee",
     "abbreviation": "PKR",
-    "symbol": "₨"
+    "symbol": "₨ "
   },
   {
     "currency": "United Kingdom Pound",
@@ -33,10 +33,5 @@
     "currency": "United States Dollar",
     "abbreviation": "USD",
     "symbol": "$"
-  },
-  {
-    "currency": "Venezuela Bolivar",
-    "abbreviation": "VEF",
-    "symbol": "Bs"
   }
 ]
