@@ -21,13 +21,12 @@
           </select>
         </div>
       </div>
-      <!-- <img src="../assets/bg.jpg" alt=""> -->
       <div
         class="title bg-gradient-to-b from-gray-900 to-gray-600 p-4 text-center text-white w-full h-full flex flex-col justify-center items-center">
         <h1 class="text-2xl">CRYPTOHUNTER</h1>
         <h3>Get all the info regarding your favorite Cryptocurrency</h3>
-        <div class="grid grid-cols-4 flex-row justify-between gap-4" v-if="list.length > 0">
-          <div v-for="n in 4" :key="n" class="card rounded-md flex flex-col p-2 items-center ">
+        <div class="grid grid-cols-3  flex-row justify-between gap-4" v-if="list.length > 0">
+          <div v-for="n in 3" :key="n" class="card rounded-md flex flex-col p-2 items-center ">
             <img :src="list.length > 0 ? list[n - 1].image : ''" alt="{{list[n-1].id}}" class="h-[2rem] w-[2rem]">
             <h1>{{ list.length > 0 ? list[n - 1].name : '' }} <span
                 :class="(list[n - 1].price_change_24h < 0) ? 'text-red-500' : 'text-green-500'">{{
@@ -57,11 +56,12 @@
               <tbody class="text-white text-center ">
                 <tr v-for="(crypto, index) in listToShow" :key="index"
                   @click="goToDetails(crypto.id, 1, 'hourly', index)" class="cursor-pointer ">
-                  <td class="px-[2rem] flex items-center font-bold">
-                    {{ crypto.name }}</td>
-                  <img :src="crypto.image" class="w-[1rem] h-[1rem] mr-[0.1rem]" alt="">
+                  <td class="px-[2rem] flex  items-center font-bold">
+                    <img :src="crypto.image" class="w-[1rem] h-[1rem] mr-[0.1rem]" alt="">
+                    {{ crypto.name }}
+                  </td>
                   <td class="px-[2rem]">{{ currencies[currencyId]['symbol'] }} {{ crypto.current_price.toFixed(3) }}
-                   </td> 
+                  </td>
                   <td class="px-[2rem]" :class="(crypto.price_change_24h < 0) ? 'text-red-500' : 'text-green-500'">
                     <span :class="(crypto.price_change_24h > 0) ? '' : 'hidden'">+</span>{{
                     (crypto.price_change_percentage_24h).toFixed(3)
@@ -97,23 +97,23 @@
       </div>
       <div class="detailsScreen mt-[3rem] md:grid md:grid-cols-8">
         <div class="md:col-span-2  flex flex-col gap-4 items-center justify-center text-white  details">
-          <!-- <img :src="currentCoinDetail.image['large']" class="h-[8rem] w-[8rem]"> -->
-          <!-- <p class="text-[1.8rem] uppercase">{{ currentCoinDetail.name }}</p> -->
+          <img :src="currentCoinDetail.image['large']" class="h-[8rem] w-[8rem]">
+          <p class="text-[1.8rem] uppercase">{{ currentCoinDetail.name }}</p>
           <p class="text-[1.2rem] uppercase">Rank:{{ currentCoinDetail.market_cap_rank }}</p>
-          <!-- <p class="text-[1.2rem] uppercase">Price:{{ currencies[currencyId]['symbol'] }}{{
-              currentCoinDetail.market_data.current_price[currencies[currencyId]['abbreviation'].toLowerCase()]
-          }} </p> -->
+          <p class="text-[1.2rem] uppercase">Price:{{ currencies[currencyId]['symbol'] }}{{
+          currentCoinDetail.market_data.current_price[currencies[currencyId]['abbreviation'].toLowerCase()]
+          }} </p>
           <p class="text-[1.2rem] uppercase">24h Change:<span
               :class="(currentCoinDetail.price_change_percentage_24h > 0) ? 'text-green-700' : 'text-red-500'">{{
               (currentCoinDetail.market_data.price_change_percentage_24h * 10).toFixed(2)
               }}%</span>
           </p>
-          <!-- <p class="text-[1.2rem] uppercase">All-Time-High:{{ currencies[currencyId]['symbol']
-          }}{{ currentCoinDetail.market_data.ath[currencies[currencyId]['abbreviation'].toLowerCase()] }}</p> -->
-          <!-- <p class="text-[1.2rem] uppercase">All-Time-Low:{{ currencies[currencyId]['symbol']
+          <p class="text-[1.2rem] uppercase">All-Time-High:{{ currencies[currencyId]['symbol']
+          }}{{ currentCoinDetail.market_data.ath[currencies[currencyId]['abbreviation'].toLowerCase()] }}</p>
+          <p class="text-[1.2rem] uppercase">All-Time-Low:{{ currencies[currencyId]['symbol']
           }}{{ currentCoinDetail.market_data.atl[currencies[currencyId]['abbreviation'].toLowerCase()] }}</p>
           <p class="text-[1.2rem] uppercase">Market-cap:{{ currencies[currencyId]['symbol']
-          }}{{ currentCoinDetail.market_data.market_cap[currencies[currencyId]['abbreviation'].toLowerCase()] }}</p> -->
+          }}{{ currentCoinDetail.market_data.market_cap[currencies[currencyId]['abbreviation'].toLowerCase()] }}</p>
         </div>
         <div class="md:col-span-6  graph">
           <canvas id="myChart" class=""></canvas>
@@ -184,24 +184,12 @@
               id="W_Type4">Cryptocurrency</span> as much as we enjoy offering them to you.</p>
           <p>I will keep posting more important posts on my Website for all of you. Please give your support and love.
           </p>
-          <div class="grid grid-cols-3 mb-4">
-            <div
-              class="bg-white overflow-hidden flex flex-col items-center justify-center  border-b-4 border-blue-500 w-11/12 mt-4">
-              <img src="./assets/usama.png" alt="People"
-                class="w-64 object-cover h-32 sm:h-32 md:w-64 md:h-64 rounded-[16rem]">
-              <div class="p-4 md:p-6 text-black">
-                <h3 class="mb-2 text-3xl text-black ">Muhammed Usama</h3>
-                <p>Designer</p>
-                <div class="text-lg text-black flex items-center">
-                </div>
-              </div>
-            </div>
+          <div class="grid md:grid-cols-3 mb-4">
 
 
             <div
               class="bg-white overflow-hidden flex flex-col items-center justify-center  border-b-4 border-blue-500 w-11/12 mt-4">
-              <img src="./assets/fahad.jpg" alt="People"
-                class="w-64 object-cover h-32 sm:h-32 md:w-64 md:h-64 rounded-[16rem]">
+              <img src="./assets/fahad.jpg" alt="People" class="h-50 w-50 md:h-64 md:w-64 object-cover rounded-full">
               <div class="p-4 md:p-6 text-black">
                 <h3 class="mb-2 text-3xl text-black ">Fahad Zardari</h3>
                 <p>Developer</p>
@@ -211,8 +199,17 @@
             </div>
             <div
               class="bg-white overflow-hidden flex flex-col items-center justify-center  border-b-4 border-blue-500 w-11/12 mt-4">
-              <img src="./assets/arayan.png" alt="People"
-                class="w-64 object-cover h-32 sm:h-32 md:w-64 md:h-64 rounded-[16rem]">
+              <img src="./assets/usama.png" alt="People" class="w-64 object-cover  rounded-full">
+              <div class="p-4 md:p-6 text-black">
+                <h3 class="mb-2 text-3xl text-black ">Muhammed Usama</h3>
+                <p>Designer</p>
+                <div class="text-lg text-black flex items-center">
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white overflow-hidden flex flex-col items-center justify-center  border-b-4 border-blue-500 w-11/12 mt-4">
+              <img src="./assets/arayan.png" alt="People" class="w-64 object-cover rounded-full">
               <div class="p-4 md:p-6 text-black">
                 <h3 class="mb-2 text-3xl text-black ">Muhammad Arayan</h3>
                 <p>Developer</p>
@@ -241,43 +238,7 @@ export default {
   data() {
     return {
       list: [],
-      currencies: [
-        {
-          "currency": "Canada Dollar",
-          "abbreviation": "CAD",
-          "symbol": "$"
-        },
-        {
-          "currency": "China Yuan Renminbi",
-          "abbreviation": "CNY",
-          "symbol": "¥"
-        },
-        {
-          "currency": "Euro Member Countries",
-          "abbreviation": "EUR",
-          "symbol": "€"
-        },
-        {
-          "currency": "India Rupee",
-          "abbreviation": "INR",
-          "symbol": "₹"
-        },
-        {
-          "currency": "Pakistan Rupee",
-          "abbreviation": "PKR",
-          "symbol": "₨ "
-        },
-        {
-          "currency": "United Kingdom Pound",
-          "abbreviation": "GBP",
-          "symbol": "£"
-        },
-        {
-          "currency": "United States Dollar",
-          "abbreviation": "USD",
-          "symbol": "$"
-        }
-      ],
+      currencies: currencyImport,
       currentList: [],
       listToShow: [],
       currencyToShowIn: null,
@@ -302,7 +263,7 @@ export default {
     this.currentList = await this.getList();
     this.listToShow = this.currentList;
     this.list = await this.getFullList();
-   
+
   },
 
 
@@ -314,7 +275,7 @@ export default {
 
       this.currencyToShowIn = localStorage.getItem("currencyToShowIn") || "pkr";
       // this.currencyToShowIn =  "pkr";
-      
+
       let response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=' + this.currencyToShowIn + '&order=market_cap_desc');
       this.currencies = currencyImport;
       return response.json();
@@ -334,18 +295,18 @@ export default {
       this.listToShow = this.currentList;
     },
     search() {
-      //if(this.searchTerm)
-      // if (this.searchTerm == "") {
-      //   this.listToShow = this.currentList;
-      // } else {
-      //   this.listToShow = this.list.filter((crypto) => {
-      //     return (
-      //       crypto.name
-      //         .toLowerCase()
-      //         .includes(this.searchTerm.toLowerCase())
-      //     );
-      //   });
-      // }
+      if (this.searchTerm)
+        if (this.searchTerm == "") {
+          this.listToShow = this.currentList;
+        } else {
+          this.listToShow = this.list.filter((crypto) => {
+            return (
+              crypto.name
+                .toLowerCase()
+                .includes(this.searchTerm.toLowerCase())
+            );
+          });
+        }
     },
     goToDetails(coinName, days, interval, index) {
       this.cryptoIndex = index;
@@ -449,15 +410,4 @@ body {
 .aboutUsPage {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-
-/* .details:after {
-  content: "";
-  background-color: white;
-  position: absolute;
-  width: 0.05rem;
-  height: 80%;
-  top: 3rem;
-  left: 3rem;
-  display: block;
-} */
 </style>
